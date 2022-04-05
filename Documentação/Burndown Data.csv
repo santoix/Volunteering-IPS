@@ -1,0 +1,105 @@
+Summary,Created,Resolved,,Data,Planeado,Realizado,,Data,Planeado,Realizado,Teste
+Backend - Ação de Sortear,20-06-20 21:15,21-06-20 18:10,,07-May,104,104,,07-May,50,50,50
+Adicionar XP e volcoins (Moedas),20-06-20 19:59,20-06-20 21:11,,08-May,98,101,,08-May,44,47,47.61904762
+Testes de Sistema (Browser),16-06-20 02:17,23-06-20 02:40,,09-May,97,99,,09-May,43,45,45.23809524
+Testes de Aceitação,16-06-20 02:17,22-06-20 19:51,,10-May,97,94,,10-May,43,40,42.85714286
+Testes de Integração,16-06-20 02:16,23-06-20 02:01,,12-May,93,93,,12-May,39,39,40.47619048
+Testes Unitários,16-06-20 02:16,23-06-20 02:00,,18-May,93,92,,18-May,39,38,38.0952381
+Testes,16-06-20 02:15,24-06-20 21:01,,20-May,86,91,,20-May,32,37,35.71428571
+Interfaces com o utilizador,16-06-20 02:14,23-06-20 15:10,,22-May,81,90,,22-May,27,36,33.33333333
+BPDs,16-06-20 02:14,24-06-20 00:44,,23-May,81,88,,23-May,27,34,30.95238095
+Diagrama de Coleções,16-06-20 02:13,23-06-20 02:08,,25-May,81,81,,25-May,27,27,28.57142857
+Requisitos funcionais (Implementados),16-06-20 02:13,23-06-20 01:44,,26-May,77,80,,26-May,23,26,26.19047619
+Sumário Executivo,16-06-20 02:13,22-06-20 22:47,,28-May,77,77,,28-May,23,23,23.80952381
+Introdução,16-06-20 02:12,22-06-20 22:46,,31-May,77,77,,31-May,23,23,21.42857143
+Documentação,16-06-20 02:11,24-06-20 21:01,,11-Jun,73,75,,11-Jun,19,21,19.04761905
+FullStack - Recrutar Voluntários,16-06-20 02:11,18-06-20 19:20,,12-Jun,73,72,,12-Jun,19,18,16.66666667
+FullStack - Página de Sorteio,16-06-20 02:10,21-06-20 23:26,,16-Jun,72,69,,16-Jun,18,14,14.28571429
+FullStack - Página de Leaderboard,16-06-20 02:10,21-06-20 23:25,,17-Jun,65,66,,17-Jun,15,11,11.9047619
+FullStack - Listagem de Sorteios (Gestão),16-06-20 02:09,20-06-20 17:17,,18-Jun,62,65,,18-Jun,13,10,9.523809524
+FullStack - Edição de Sorteios (Gestão),16-06-20 02:09,20-06-20 19:55,,20-Jun,58,59,,20-Jun,10,4,7.142857143
+FullStack - Criação de Sorteios (Gestão),16-06-20 02:09,20-06-20 16:49,,21-Jun,58,56,,21-Jun,10,2,4.761904762
+Frontend - Edição de Sorteios (Gestão),16-06-20 02:06,20-06-20 21:11,,23-Jun,54,56,,24-Jun,7,0,2.380952381
+Frontend - Criação de Sorteios (Gestão),16-06-20 02:05,20-06-20 21:12,,24-Jun,54,54,,30-Jun,0,0,0
+Frontend - Listagem de Sorteios (Gestão),16-06-20 02:05,17-06-20 22:10,,,,,,,,,
+Frontend - Página de Sorteio,16-06-20 02:04,20-06-20 21:12,,,,,,,,,
+Frontend - Página de Sorteios,16-06-20 02:04,16-06-20 02:25,,,,,,,,,
+Frontend - Página de Leaderboard,16-06-20 02:03,16-06-20 02:24,,,,,,,,,
+Estísticas de Utilizador,16-06-20 02:02,17-06-20 18:25,,,,,,,,,
+Estísticas Globais,16-06-20 02:01,17-06-20 04:04,,,,,,,,,
+Estatísticas Individuais de Voluntariado,16-06-20 01:59,16-06-20 02:23,,,,,,,,,
+Interface - Dashboard,07-06-20 18:41,08-06-20 21:32,,,,,,,,,
+Lista de Voluntariados de um utilizador,03-06-20 17:27,08-06-20 01:05,,,,,,,,,
+Gestão de Voluntariado (Pelos admins e/ou responsáveis),29-05-20 02:11,05-06-20 19:26,,,,,,,,,
+Voluntariado (Individual),29-05-20 02:08,10-06-20 00:32,,,,,,,,,
+Gestão de Propostas de Voluntariado Interno/Externo,29-05-20 02:03,09-06-20 21:01,,,,,,,,,
+Remoção de Voluntariados Internos/Externos,29-05-20 02:01,05-06-20 17:01,,,,,,,,,
+Visualização de Voluntariados Internos/Externos,29-05-20 01:31,01-06-20 19:59,,,,,,,,,
+Criação de Voluntariados Internos/Externos,29-05-20 01:30,03-06-20 16:45,,,,,,,,,
+Full Stack,29-05-20 01:26,11-06-20 20:15,,,,,,,,,
+Interface - Gestão de Voluntariado (Pelos admins e/ou responsáveis),29-05-20 01:20,08-06-20 21:29,,,,,,,,,
+Interface - Listagem de Voluntariados (Público),29-05-20 01:16,03-06-20 20:14,,,,,,,,,
+Interface - Voluntariado (Individual),29-05-20 01:12,03-06-20 17:06,,,,,,,,,
+Interface - Gestão de Propostas de Voluntariados Externos,29-05-20 01:07,08-06-20 21:31,,,,,,,,,
+Interface - Gestão de Propostas de Voluntariados Internos,29-05-20 01:07,08-06-20 21:31,,,,,,,,,
+"Interface - ""Meus Voluntariados""",29-05-20 01:06,07-06-20 18:33,,,,,,,,,
+Interface - Proposta de Voluntariado Externo,29-05-20 01:02,08-06-20 21:31,,,,,,,,,
+Interface - Proposta de Voluntariado Interno,29-05-20 01:01,08-06-20 21:28,,,,,,,,,
+Interface - Gestão de Voluntariados Externos,29-05-20 01:00,07-06-20 18:34,,,,,,,,,
+Interface - Gestão de Voluntariados Internos,29-05-20 01:00,07-06-20 18:34,,,,,,,,,
+Frontend,29-05-20 00:58,12-06-20 15:53,,,,,,,,,
+Desenvolvimento,29-05-20 00:57,11-06-20 15:53,,,,,,,,,
+Testes de Aceitação,29-05-20 00:54,11-06-20 03:31,,,,,,,,,
+Testes de Sistema (Browser),29-05-20 00:53,11-06-20 18:42,,,,,,,,,
+Testes de Integração,29-05-20 00:53,11-06-20 02:38,,,,,,,,,
+Testes Unitários,29-05-20 00:53,11-06-20 02:39,,,,,,,,,
+Testes,29-05-20 00:52,12-06-20 15:52,,,,,,,,,
+Interfaces com o utilizador,29-05-20 00:50,11-06-20 21:34,,,,,,,,,
+BPDs,29-05-20 00:49,08-06-20 20:45,,,,,,,,,
+Diagrama de Coleções,29-05-20 00:48,05-06-20 13:45,,,,,,,,,
+Requisitos funcionais (Implementados),29-05-20 00:47,11-06-20 18:50,,,,,,,,,
+Sumário Executivo,29-05-20 00:47,01-06-20 22:07,,,,,,,,,
+Introdução,29-05-20 00:46,01-06-20 22:05,,,,,,,,,
+Desenho Detalhado,29-05-20 00:44,12-06-20 15:52,,,,,,,,,
+Registo de Utilizadores,17-05-20 15:29,25-05-20 13:23,,,,,,,,,
+Recuperação de Password,13-05-20 12:59,17-05-20 23:27,,,,,,,,,
+Login,13-05-20 12:56,17-05-20 22:46,,,,,,,,,
+Gerir Perfil,13-05-20 12:54,25-05-20 20:23,,,,,,,,,
+Gerir Utilizadores,13-05-20 12:49,22-05-20 23:43,,,,,,,,,
+Manual de Utilização,13-05-20 12:44,27-05-20 18:24,,,,,,,,,
+Manual Técnico,13-05-20 12:44,27-05-20 19:03,,,,,,,,,
+Testes de Aceitação,13-05-20 12:43,26-05-20 03:22,,,,,,,,,
+Testes de Integração,13-05-20 12:42,25-05-20 13:22,,,,,,,,,
+Testes Unitários,13-05-20 12:42,25-05-20 14:26,,,,,,,,,
+Diagrama de Navegação,13-05-20 12:40,25-05-20 13:29,,,,,,,,,
+BPDs,13-05-20 12:39,27-05-20 01:08,,,,,,,,,
+Requisitos funcionais (Implementados),13-05-20 12:29,25-05-20 13:34,,,,,,,,,
+Introdução,13-05-20 12:28,23-05-20 15:30,,,,,,,,,
+Sumário Executivo,13-05-20 12:28,23-05-20 15:30,,,,,,,,,
+Mockup Alto Nível Alteração Password (Perfil),13-05-20 12:26,25-05-20 13:29,,,,,,,,,
+Mockup Alto Nível Edição Perfil,13-05-20 12:26,25-05-20 13:29,,,,,,,,,
+Mockup Alto Nível Perfil,13-05-20 12:25,25-05-20 13:29,,,,,,,,,
+Mockup Alto Nível Alteração Password,13-05-20 12:24,25-05-20 13:29,,,,,,,,,
+Mockup Alto Nível Recuperação Password,13-05-20 12:24,25-05-20 13:29,,,,,,,,,
+Mockup Alto Nível Registo,13-05-20 12:24,25-05-20 13:29,,,,,,,,,
+Mockup Alto Nível Login,13-05-20 12:23,25-05-20 13:28,,,,,,,,,
+Página de Alterar Password (Perfil),13-05-20 12:20,22-05-20 23:45,,,,,,,,,
+Página de Ediçã de Perfil,13-05-20 12:20,22-05-20 23:45,,,,,,,,,
+Página de Perfil,13-05-20 12:19,22-05-20 23:44,,,,,,,,,
+Página de Alterar Password,13-05-20 12:18,20-05-20 18:27,,,,,,,,,
+Página de Recuperar Password,13-05-20 12:18,20-05-20 18:27,,,,,,,,,
+Página de Registo (Admin),13-05-20 12:18,20-05-20 18:26,,,,,,,,,
+Página de Login,13-05-20 12:16,20-05-20 18:23,,,,,,,,,
+Frontend,06-05-20 19:10,25-05-20 13:27,,,,,,,,,
+Mockups,06-05-20 19:10,25-05-20 13:30,,,,,,,,,
+Implementação das Notificações - 3,06-05-20 18:48,10-05-20 00:00,,,,,,,,,
+Implementação das Notificações - 2,06-05-20 18:48,10-05-20 00:55,,,,,,,,,
+Implementação das Notificações - 1,06-05-20 18:47,09-05-20 02:28,,,,,,,,,
+Manual Técnico,06-05-20 18:36,10-05-20 11:04,,,,,,,,,
+Testes de Aceitação,06-05-20 18:36,10-05-20 15:56,,,,,,,,,
+Testes Unitários,06-05-20 18:36,09-05-20 20:11,,,,,,,,,
+BPDs,06-05-20 18:35,08-05-20 19:09,,,,,,,,,
+Diagrama de Coleções,06-05-20 18:35,20-05-20 18:38,,,,,,,,,
+Requisitos funcionais (Implementados),06-05-20 18:34,11-05-20 22:07,,,,,,,,,
+Introdução,06-05-20 18:33,08-05-20 19:40,,,,,,,,,
+Sumário Executivo,06-05-20 18:30,08-05-20 19:27,,,,,,,,,

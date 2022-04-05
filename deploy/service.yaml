@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: volunteeringips-service
+  namespace: volunteeringips-dev
+spec:
+  type: NodePort
+  selector:
+    name: volunteeringips
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000

@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    name: volunteeringips
+  name: volunteeringips-deployment
+  namespace: volunteeringips-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: volunteeringips
+  template:
+    metadata:
+      labels:
+        name: volunteeringips
+    spec:
+      containers:
+        - name: volunteeringips-app
+          image: docker.io/%%dockerUser%%/volunteeringips:%%imageTag%%
+          imagePullPolicy: Always
+          env:
+            - name: SERVER_ID #export the pod ID as SERVER_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: environment
+              value: dev
+            - name: ATLAS_URI
+              value: "%%atlasUri%%"
+            - name: EMAIL_ADDRESS
+              value: "%%emailAddress%%"
+            - name: AUTH_KEY
+              value: "%%authKey%%"
+            - name: SENDGRID_API_KEY
+              value: "%%sendgridApiKey%%"
+            - name: PORT
+              value: "%%port%%"
+            - name: COOKIE_KEY
+              value: "%%cookieKey%%"
+            - name: HOST_ADDRESS
+              value: "%%hostAddress%%"
+            - name: JWT_PRIVATE_KEY
+              value: "%%jwtPrivateKey%%"
+          resources:
+            requests:
+              memory: "356Mi"
+              cpu: "350m"
+            limits:
+              memory: "612Mi"
+              cpu: "600m"
+      imagePullSecrets:
+        - name: docker-registry
