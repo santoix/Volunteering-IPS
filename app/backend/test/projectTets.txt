@@ -1,0 +1,364 @@
+require("dotenv").config({ path: "../.env" });
+const chai = require("chai");
+const mongoose = require("mongoose");
+const chaiHttp = require("chai-http");
+const data = require("./dataProject.json");
+const UserModel = require("../models/user.model");
+const user = require("../routes/user");
+const ProjetModel = require("../models/project.model");
+const project = require("../routes/project");
+const config = require("../config");
+const uri = config.atlasUri;
+
+chai.use(chaiHttp);
+chai.should();
+
+before((done) => {
+  mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+  });
+
+  const connection = mongoose.connection;
+  connection.once("open", () => {
+    done();
+  });
+});
+
+describe("Projects - Endpoints", () => {
+  describe("GET - Projects", () => {
+    describe("GET /api/project/", () => {
+      it("Deve obter todos os projetos - 200", (done) => {
+        chai
+          .request("http://localhost:5000")
+          .get("/api/project/")
+          .end((err, res) => {
+            chai.assert.isNull(err);
+            res.body.should.be.a("object");
+            res.should.have.status(200);
+            res.body.should.have.property("success").equal(true);
+            done();
+          });
+      });
+    });
+
+    describe("GET /api/project/details/:id", () => {
+      it("Deve obter o projeto pelo id - 200", (done) => {
+        chai
+          .request("http://localhost:5000")
+          .get("/api/project/details/" + data.UPDATE_PROJECT._id)
+          .end((err, res) => {
+            chai.assert.isNull(err);
+            res.body.should.be.a("object");
+            res.should.have.status(200);
+            res.body.should.have.property("success").equal(true);
+            done();
+          });
+      });
+    });
+
+    describe("GET /api/project/:id/users", () => {
+      it("Deve obter os utilizadores de um projeto - 200", (done) => {
+        chai
+          .request("http://localhost:5000")
+          .get("/api/project/" + data.UPDATE_PROJECT._id + "/users")
+          .end((err, res) => {
+            chai.assert.isNull(err);
+            res.should.have.status(200);
+            res.body.should.have.property("success").equal(true);
+            done();
+          });
+      });
+    });
+
+    describe("GET /api/project/propositions", () => {
+      it("Deve obter todos os projetos - 200", (done) => {
+        chai
+          .request("http://localhost:5000")
+          .get("/api/project/propositions")
+          .end((err, res) => {
+            chai.assert.isNull(err);
+            res.should.have.status(200);
+            res.body.should.have.property("success").equal(true);
+            done();
+          });
+      });
+    });
+
+    describe("GET /api/project/isPersonOfContactOrAdmin/:id", () => {
+      it("Deve Deve obter um admin - 200", (done) => {
+        chai
+          .request("http://localhost:5000")
+          .get(
+            "/api/project/isPersonOfContactOrAdmin/" + data.UPDATE_PROJECT._id
+          )
+          .set("Cookie", "token=" + data.LOGIN_JOANAM.token)
+          .end((err, res) => {
+            //chai.assert.isNull(err);
+            res.should.have.status(200);
+            res.body.should.have.property("success").equal(true);
+            res.body.should.have.property("message").equal("Access allowed");
+            done();
+          });
+      });
+      it("Deve Deve obter uma pessoa de contacto - 200", (done) => {
+        chai
+          .request("http://localhost:5000")
+          .get(
+            "/api/project/isPersonOfContactOrAdmin/" + data.UPDATE_PROJECT._id
+          )
+          .set("Cookie", "token=" + data.LOGIN_JOANAM.token)
+          .end((err, res) => {
+            //chai.assert.isNull(err);
+            res.should.have.status(200);
+            res.body.should.have.property("success").equal(true);
+            res.body.should.have.property("message").equal("Access allowed");
+            done();
+          });
+      });
+    });
+  });
+
+  describe("PUT - Projects", () => {
+    describe("PUT /api/project/update/:id", () => {
+      it("Deve atualizar um projeto - 200", (done) => {
+        chai
+          .request("http://localhost:5000")
+          .put("/api/project/update/" + data.UPDATE_PROJECT._id)
+          .send(data.UPDATE_PROJECT)
+          .end((err, res) => {
+            chai.assert.isNull(err);
+            chai.assert.isNotEmpty(res.body);
+            res.should.have.status(200);
+            res.body.should.have.property("success").equal(true);
+            res.body.should.have
+              .property("message")
+              .equal("Projeto atualizado!");
+            done();
+          });
+      });
+    });
+    describe("POST /api/project/:id/users - PUT /api/project/update/:id/projectMembers/remove", () => {
+      it("Deve por e retirar os utilizadores selecionados de um projeto - 200", (done) => {
+        chai
+          .request("http://localhost:5000")
+          .post("/api/project/" + data.UPDATE_PROJECT._id + "/users")
+          .send(data.ADD_NEW_USER_NUNO_PINA)
+          .end((err, res) => {
+            chai.assert.isNull(err);
+            chai.assert.isNotEmpty(res.body);
+            res.should.have.status(200);
+            res.body.should.have.property("success").equal(true);
+          });
+        chai
+          .request("http://localhost:5000")
+          .put(
+            "/api/project/update/" +
+              data.UPDATE_PROJECT._id +
+              "/projectMembers/remove"
+          )
+          .send(data.USERS_TO_REMOVE)
+          .end((err, res) => {
+            chai.assert.isNull(err);
+            chai.assert.isNotEmpty(res.body);
+            res.should.have.status(200);
+            res.body.should.have.property("success").equal(true);
+          });
+        done();
+      });
+    });
+
+    describe("PUT /api/project/update/:id/projectMembers/revokePresence", () => {
+      it("Deve revogar presenca do utilizador no projeto - 200", (done) => {
+        chai
+          .request("http://localhost:5000")
+          .put(
+            "/api/project/update/" +
+              data.UPDATE_PROJECT._id +
+              "/projectMembers/revokePresence"
+          )
+          .send(data.REVOKE_USERS)
+          .end((err, res) => {
+            chai.assert.isNull(err);
+            chai.assert.isNotEmpty(res.body);
+            res.should.have.status(200);
+            res.body.should.have.property("success").equal(true);
+            done();
+          });
+      });
+    });
+
+    describe("PUT /api/project/update/:id/projectMembers/confirmPresence", () => {
+      it("Deve confirmar presenca do utilizador no projeto - 200", (done) => {
+        chai
+          .request("http://localhost:5000")
+          .put(
+            "/api/project/update/" +
+              data.UPDATE_PROJECT._id +
+              "/projectMembers/confirmPresence"
+          )
+          .send(data.ACCEPT_USERS)
+          .end((err, res) => {
+            chai.assert.isNull(err);
+            chai.assert.isNotEmpty(res.body);
+            res.should.have.status(200);
+            res.body.should.have.property("success").equal(true);
+            done();
+          });
+      });
+    });
+
+    describe("PUT /api/project/update/:id/projectMembers/revokePOC", () => {
+      it("Deve revogar utilizador como pessoa de contacto - 200", (done) => {
+        chai
+          .request("http://localhost:5000")
+          .put(
+            "/api/project/update/" +
+              data.UPDATE_PROJECT._id +
+              "/projectMembers/revokePOC"
+          )
+          .send(data.REVOKE_PERSON_OF_CONTACT)
+          .end((err, res) => {
+            chai.assert.isNull(err);
+            chai.assert.isNotEmpty(res.body);
+            res.should.have.status(200);
+            res.body.should.have.property("success").equal(true);
+            done();
+          });
+      });
+    });
+
+    describe("PUT /api/project/update/:id/projectMembers/makePOC", () => {
+      it("Deve por utilizador como pessoa de contacto - 200", (done) => {
+        chai
+          .request("http://localhost:5000")
+          .put(
+            "/api/project/update/" +
+              data.UPDATE_PROJECT._id +
+              "/projectMembers/makePOC"
+          )
+          .send(data.MAKE_PERSON_OF_CONTACT)
+          .end((err, res) => {
+            chai.assert.isNull(err);
+            chai.assert.isNotEmpty(res.body);
+            res.should.have.status(200);
+            res.body.should.have.property("success").equal(true);
+            done();
+          });
+      });
+    });
+    describe("PUT /api/project/update/:id/projectMembers/decline", () => {
+      it("Deve revogar candidatura do utilizador - 200", (done) => {
+        chai
+          .request("http://localhost:5000")
+          .put(
+            "/api/project/update/" +
+              data.UPDATE_PROJECT._id +
+              "/projectMembers/decline"
+          )
+          .send(data.DECLINE_MEMBER)
+          .end((err, res) => {
+            chai.assert.isNull(err);
+            chai.assert.isNotEmpty(res.body);
+            res.should.have.status(200);
+            res.body.should.have.property("success").equal(true);
+            done();
+          });
+      });
+    });
+
+    describe("PUT /api/project/update/:id/projectMembers/accept", () => {
+      it("Deve aceitar candidatura dos utilizadores - 200", (done) => {
+        chai
+          .request("http://localhost:5000")
+          .put(
+            "/api/project/update/" +
+              data.UPDATE_PROJECT._id +
+              "/projectMembers/accept"
+          )
+          .send(data.ACCEPT_MEMBER)
+          .end((err, res) => {
+            chai.assert.isNull(err);
+            chai.assert.isNotEmpty(res.body);
+            res.should.have.status(200);
+            res.body.should.have.property("success").equal(true);
+            done();
+          });
+      });
+    });
+  });
+
+  describe("POST - Projects", () => {
+    describe("POST /api/project/", () => {
+      it("Deve criar o projeto - 201", (done) => {
+        chai
+          .request("http://localhost:5000")
+          .post("/api/project/")
+          .send(data.CREATE_TEST_PROJECT)
+          .end((err, res) => {
+            chai.assert.isNull(err);
+            chai.assert.isNotEmpty(res.body);
+            res.should.have.status(201);
+            res.body.should.have.property("success").equal(true);
+            res.body.should.have
+              .property("message")
+              .equal("Projeto criado com sucesso");
+            done();
+          });
+      });
+    });
+
+    describe("POST /api/project/proposal", () => {
+      it("Deve criar um projeto pelo utilizador - 201", (done) => {
+        chai
+          .request("http://localhost:5000")
+          .post("/api/project/proposal")
+          .send(data.USER_PROPOSAL)
+          .end((err, res) => {
+            chai.assert.isNull(err);
+            chai.assert.isNotEmpty(res.body);
+            res.should.have.status(201);
+            res.body.should.have.property("success").equal(true);
+            res.body.should.have
+              .property("message")
+              .equal("Proposta submetida com sucesso");
+            done();
+          });
+      });
+    });
+
+    describe("POST /api/project/propositionStatus/", () => {
+      it("Deve aceitar o projeto proposto - 200", (done) => {
+        chai
+          .request("http://localhost:5000")
+          .post("/api/project/propositionStatus/")
+          .send(data.ACCPTED_PROJECT)
+          .end((err, res) => {
+            chai.assert.isNull(err);
+            chai.assert.isNotEmpty(res.body);
+            res.should.have.status(200);
+            res.body.should.have.property("success").equal(true);
+            res.body.should.have.property("message").equal("Projeto Aceito!");
+            done();
+          });
+      });
+
+      it("Deve recusar o projeto prposto - 200", (done) => {
+        chai
+          .request("http://localhost:5000")
+          .post("/api/project/propositionStatus/")
+          .send(data.REFUSE_PROJECT)
+          .end((err, res) => {
+            chai.assert.isNull(err);
+            chai.assert.isNotEmpty(res.body);
+            res.should.have.status(200);
+            res.body.should.have.property("success").equal(true);
+            res.body.should.have.property("message").equal("Projeto Recusado!");
+            done();
+          });
+      });
+    });
+  });
+});

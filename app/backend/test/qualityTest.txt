@@ -1,0 +1,75 @@
+require("dotenv").config();
+const mongoose = require("mongoose");
+const Project = require("./project.model-test");
+const project = require("../routes/project");
+const config = require("../config");
+const uri = config.atlasUri;
+
+before((done) => {
+  mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+  });
+
+  const connection = mongoose.connection;
+  connection.once("open", () => {
+    done();
+  });
+});
+
+addSeveralProjects = (n) => {
+  let creationDate = new Date().toISOString().split("T")[0];
+  let projects = [];
+
+  for (let index = 0; index < n; index++) {
+    let project = {
+      objectives: [" Objetivo A,"],
+      areasOfInterest: ["Ambiental"],
+      envolvedEntities: ["Continente"],
+      isInactive: false,
+      isInternal: true,
+      isAccepted: true,
+      name: `Projeto teste ${index}`,
+      users: [
+        {
+          userID: "5ed11eb07eb17f3c5842d8b9",
+          isPersonOfContact: true,
+          didAttend: true,
+          isAccepted: false,
+        },
+      ],
+      summary: "Um projeto interno de teste atualizado",
+      areaOfIntervention: "A área de internvenção Teste",
+      targetAudience: ["O público alvo"],
+      activitiesDescription: "Uma descrição das atividades nocturnas Teste",
+      specificTraining: "Uma formação em específico",
+      foreseenStartDateTime: creationDate,
+      foreseenEndDateTime: creationDate,
+      createdBy: "5ecb1497dae8eb0e0c260c32",
+      notes: "As notas",
+      RGPD: true,
+      vacancies: 100,
+      organizationName: "",
+      logo: "//placehold.it/100,",
+      locationCoord: "38.5218273,-8.8386823",
+    };
+
+    let tempProject = new Project(project);
+    projects.push(tempProject);
+  }
+
+  projects.map((proj) => {
+    proj.save();
+  });
+};
+
+after((done) => {
+  Project.count({}, function (err, count) {
+    console.log("Projetos", count);
+    done();
+  });
+});
+
+addSeveralProjects(500);

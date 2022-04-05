@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Proposta de projeto submetida</title>
+    <meta charset="UTF-8">
+</head>
+
+<body style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+    <%- include('partials/header'); %>
+    
+    <div style="padding: 25px 10px 10px 10px;">
+        <b style="font-size: 20px;">Caro <%= params.firstName %>,</b><br/><br/>
+        <p style="font-size: 14px;">Informamos-lhe que foi submetida uma nova <u><b>proposta de projeto</b></u> no VolunteeringIPS.</p>
+        <br/>
+        <p><u>Detalhes da proposta</u>:</p>
+        <div>
+            <p>Titulo: <%= params.volunteeringName %></p>
+            <p>Remetente: <%= params.userName %></p>
+            <p>Áreas de Interesse: <%= params.areasOfInterest %></p>
+            <p>Data de Começo: <%= params.startDate %></p>
+            <p>Data de término: <%= params.endDate %></p>
+        </div>
+        <br><br>
+        <b><p>Atenciosamente,</p>
+            <p>VolunteeringIPS</p></b>
+    </div>
+
+    <%- include('partials/footer'); %>
+</body>
+
+</html>

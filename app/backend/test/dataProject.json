@@ -1,0 +1,193 @@
+{
+  "LOGIN_JOANAM": {
+    "email": "180221109@estudantes.ips.pt",
+    "password": "pass",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWNiMTQ5N2RhZThlYjBlMGMyNjBjMzIiLCJpYXQiOjE1OTE3MzcyODF9.VOIkAJ4v_5Ae1Hmpr-qZWwDjN4rq26csCHS--UPHn6E"
+  },
+  "ID_PROJETO_DONO_JOANAM": {
+    "_id": "5ee169b439317252b018240e"
+  },
+  "UPDATE_PROJECT": {
+    "targetAudience": ["O público alvo"],
+    "objectives": ["Objetivo A", "Objetivo B", "Objetivo C ATUALIZADO"],
+    "areasOfInterest": ["Ambiental", "Informática"],
+    "envolvedEntities": ["Continente", "Banco Alimentar"],
+    "logo": "//placehold.it/100",
+    "locationCoord": "38.61799096559979,-9.1159154237793",
+    "isInactive": true,
+    "_id": "5ee168fe39317252b0182406",
+    "isInternal": true,
+    "isAccepted": true,
+    "name": "Projeto Interno Joanã By Admin",
+    "users": [
+      {
+        "_id": "5ee168fe39317252b0182407",
+        "userID": "5ecb1497dae8eb0e0c260c32",
+        "isPersonOfContact": true,
+        "didAttend": true,
+        "isAccepted": false
+      },
+      {
+        "_id": "5ee168fe39317252b0182408",
+        "userID": "5ed11eb07eb17f3c5842d8b9",
+        "isPersonOfContact": true,
+        "didAttend": true,
+        "isAccepted": true
+      }
+    ],
+    "summary": "Teste interno atualizado",
+    "areaOfIntervention": "Teste Interno ATUALIZADO",
+    "activitiesDescription": "Sem descrição ATUALIZADO",
+    "specificTraining": "Uma formação em específico",
+    "foreseenStartDateTime": "2020-06-10T23:11:23.737+00:00",
+    "foreseenEndDateTime": "2020-06-29T23:11:00.000+00:00",
+    "notes": "As notas",
+    "RGPD": true,
+    "vacancies": 100
+  },
+  "ADD_NEW_USER_NUNO_PINA": {
+    "userID": "5ecea77a1ca5b43e07202f0b"
+  },
+  "USERS_TO_REMOVE": {
+    "usersToRemove": ["5ecb1497dae8eb0e0c260c32"]
+  },
+  "ACCEPT_USERS": {
+    "usersToConfirm": ["5ed11eb07eb17f3c5842d8b9", "5ecb1497dae8eb0e0c260c32"]
+  },
+  "REVOKE_USERS": {
+    "usersToConfirm": ["5ed11eb07eb17f3c5842d8b9"]
+  },
+  "MAKE_PERSON_OF_CONTACT": {
+    "usersToConfirm": ["5ed11eb07eb17f3c5842d8b9"]
+  },
+  "REVOKE_PERSON_OF_CONTACT": {
+    "usersToConfirm": ["5ed11eb07eb17f3c5842d8b9"]
+  },
+  "ACCEPT_MEMBER": {
+    "usersToConfirm": ["5ecb1497dae8eb0e0c260c32"],
+    "reason": "Bla blab bla"
+  },
+  "DECLINE_MEMBER": {
+    "usersToConfirm": ["5ecb1497dae8eb0e0c260c32"],
+    "reason": "Bla blab bla decline"
+  },
+  "CREATE_TEST_PROJECT": {
+    "objectives": ["Teste A", "Teste B", "Teste C"],
+    "areasOfInterest": ["Ambiental", "Informática Teste"],
+    "envolvedEntities": ["Continente", "Banco Alimentar"],
+    "isInactive": false,
+    "isInternal": true,
+    "isAccepted": true,
+    "name": "Projeto Teste",
+    "users": [
+      {
+        "_id": "5eda51603b4ada18b0148fd1",
+        "userID": "5ed11eb07eb17f3c5842d8b9",
+        "isPersonOfContact": true,
+        "didAttend": true,
+        "isAccepted": false
+      }
+    ],
+    "summary": "Um projeto interno de teste atualizado Integração",
+    "areaOfIntervention": "A área de internvenção Teste Integração",
+    "targetAudience": ["O público alvo"],
+    "activitiesDescription": "Uma descrição das atividades nocturnas Teste Integração",
+    "specificTraining": "Uma formação em específico",
+    "foreseenStartDateTime": "2020-06-01",
+    "foreseenEndDateTime": "2020-06-30",
+    "notes": "As notas",
+    "RGPD": true,
+    "vacancies": 100,
+    "organizationName": "",
+    "logo": "//placehold.it/100",
+    "locationCoord": "38.5218273,-8.8386823",
+    "createdBy": "5ecb1497dae8eb0e0c260c32"
+  },
+  "ACCPTED_PROJECT": {
+    "isInternal": true,
+    "isAccepted": true,
+    "name": "Projeto Interno 1",
+    "users": [
+      {
+        "userID": "5ecb1497dae8eb0e0c260c32",
+        "isAccepted": true,
+        "didAttend": true,
+        "isPersonOfContact": true
+      }
+    ],
+    "summary": "Um projeto interno de teste",
+    "areaOfIntervention": "A área de internvenção",
+    "targetAudience": ["Público Alvo 1", "Público Alvo 2"],
+    "objectives": ["Objetivo A", "Objetivo B"],
+    "locationCoord": "38.61799096559979,-9.1159154237793",
+    "activitiesDescription": "Uma descrição das atividades",
+    "specificTraining": "Uma formação em específico",
+    "areasOfInterest": ["Ambiental", "Informática"],
+    "envolvedEntities": ["Continente", "Banco Alimentar"],
+    "notes": "As notas",
+    "RGPD": true,
+    "vacancies": 100,
+    "reason": "Só quero",
+    "proposalState": "Aceito",
+    "_id": "5ee168fe39317252b0182406"
+  },
+  "REFUSE_PROJECT": {
+    "RGPD": true,
+    "activitiesDescription": "gfdsgfd",
+    "areaOfIntervention": "Area",
+    "areasOfInterest": ["Ambiental", "Educação"],
+
+    "createdAt": "2020-06-10T10:44:48.707Z",
+    "envolvedEntities": [],
+    "foreseenEndDateTime": "2020-06-10T10:35:22.944Z",
+    "foreseenStartDateTime": "2020-06-10T10:35:22.944Z",
+    "isInactive": true,
+    "isInternal": true,
+    "locationCoord": "38.5218273,-8.8386823",
+    "logo": "//placehold.it/100",
+    "name": "Teste",
+    "objectives": [],
+    "proposalState": "Recusado",
+    "reason": "Yau teste Recusado",
+    "specificTraining": "",
+    "summary": "Resumo",
+    "targetAudience": ["ABC"],
+    "updatedAt": "2020-06-10T10:44:48.707Z",
+    "users": [
+      {
+        "_id": "5ee0b9a0790081055c972b6c",
+        "userID": "5ed11eb07eb17f3c5842d8b9",
+        "isAccepted": true,
+        "didAttend": null,
+        "isPersonOfContact": true
+      }
+    ],
+    "vacancies": -1,
+    "_id": "5ee169b439317252b018240e",
+    "createdBy": "5ecb1497dae8eb0e0c260c32"
+  },
+  "USER_PROPOSAL": {
+    "RGPD": true,
+    "activitiesDescription": "setsteesets",
+    "areaOfIntervention": "tsetesete",
+    "areasOfInterest": ["Saúde"],
+    "createdBy": "5ecb1497dae8eb0e0c260c32",
+    "foreseenEndDateTime": 1591894886440,
+    "foreseenStartDateTime": 1591894886440,
+    "isInternal": true,
+    "name": "Teste user proposal",
+    "objectives": [],
+    "specificTraining": "",
+    "summary": "Teste",
+    "targetAudience": ["testes"],
+    "users": [
+      {
+        "userID": "5ecb1497dae8eb0e0c260c32",
+        "isAccepted": true,
+        "didAttend": null,
+        "isPersonOfContact": true
+      }
+    ],
+    "vacancies": -1
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "PROJECTS_PER_TYPES": {
+    "statisticsData": [
+      ["Tipo", "Quantidade"],
+      ["Interno", 6],
+      ["Externo", 2]
+    ]
+  }
+}

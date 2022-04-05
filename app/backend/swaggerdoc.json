@@ -1,0 +1,746 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Manual Técnico do VolunteeringIPS",
+        "version": "1.0.0",
+        "title": "VolunteeringIPS Doc"
+    },
+    "basePath": "/api",
+    "tags": [
+        {
+            "name": "Notifications",
+            "description": "Things about Notifications"
+        },
+        {
+            "name": "Users",
+            "description": "Operations about users"
+        }
+    ],
+    "schemes": ["http"],
+    "paths": {
+        "/email/notify": {
+            "post": {
+                "summary": "Used to send an email to an user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": ["application/json"],
+                "tags": [
+                    "Notifications"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "notification",
+                        "description": "The notification to create",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/Notification"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Email successfully sent"
+                    },
+                    "401": {
+                        "description": "Email not sent due to unauthorization (invalid token)"
+                    }
+                }
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "summary": "Used to login with an user",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "login",
+                        "description": "Login to be made",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/Login"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Login successfull!"
+                    },
+                    "400": {
+                        "description": "Bad request."
+                    },
+                    "401": {
+                        "description": "The account is inactive."
+                    },
+                    "404": {
+                        "description": "Incorrect email or password."
+                    }
+                }
+            }
+        },
+        "/credentials/forgot": {
+            "post": {
+                "summary": "Used to send an email when the user forgets his account's password",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "forgot",
+                        "description": "Email to reset the password and his notification after",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/Forgot"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successefully sent"
+                    },
+                    "400": {
+                        "description": "Bad request."
+                    },
+                    "403": {
+                        "description": "Non existent email"
+                    }
+                }
+            }
+        },
+        "/credentials/reset": {
+            "patch": {
+                "summary": "Used to reset the password, when forgotten by the user",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "reset",
+                        "description": "This will only work if a 'forgot request' was made before",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/Reset"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Account's password successfully changed"
+                    },
+                    "400": {
+                        "description": "Passwords aren't the same"
+                    },
+                    "404": {
+                        "description": "Probably the Forgot Request was not made"
+                    }
+                }
+            }
+        },
+        "/credentials/confirmAccount/{token}": {
+            "get": {
+                "summary": "Used to activate the account",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "path",
+                        "description": "Generated token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Account's activation done successfully"
+                    },
+                    "400": {
+                        "description": "Invalid token!"
+                    }
+                }
+            }
+        },
+        "/credentials/isLoggedIn": {
+            "get": {
+                "summary": "Used to see if the user is logged in",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "You're logged"
+                    },
+                    "401": {
+                        "description": "Not logged or inactive account"
+                    }
+                }
+            }
+        },
+        "/credentials/hasAccess": {
+            "get": {
+                "summary": "Used to see if the user has access to a certain page",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "You have access"
+                    },
+                    "401": {
+                        "description": "You dont have access to this page"
+                    }
+                }
+            }
+        },
+        "/credentials/logout": {
+            "get": {
+                "summary": "Used to logout an user",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "You have logged out successfully (token cleared)"
+                    }
+                }
+            }
+        },
+        "/user": {
+            "get": {
+                "summary": "Get all users",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "You successfuly got the information"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Add an user",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "addUser",
+                        "description": "Insert all the information about the user",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Request successefully sent"
+                    },
+                    "400": {
+                        "description": "Empty fields,  phone number or email already in DB, RGPD not accepted or error on saving data!"
+                    },
+                    "403": {
+                        "description": "You are not an IPS community member"
+                    }
+                }
+            }
+        },
+        "/user/setImage/{email}": {
+            "post": {
+                "summary": "Insert an image into an user",
+                "consumes": [
+                    "multipart/form-data",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "path",
+                        "description": "User email",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "file",
+                        "in": "formData",
+                        "description": "Image to be inserted",
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successefully sent"
+                    },
+                    "400": {
+                        "description": "Bad request."
+                    },
+                    "403": {
+                        "description": "Non existent email"
+                    }
+                }
+            }
+        },
+        "/user/details/{id}": {
+            "get": {
+                "summary": "Get one user by is id",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "You successfuly got the information"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        },
+        "/user/delete/{id}": {
+            "delete": {
+                "summary": "Deletes one user by is id",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User successfully deleted"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        },
+        "/user/update/{id}": {
+            "put": {
+                "summary": "Edit an user",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "updateUser",
+                        "description": "Updates all the information about the user",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/UpdateUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User successefully updated"
+                    },
+                    "400": {
+                        "description": "Phone number or email already in DB!"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        },
+        "/user/updatePassword/{id}": {
+            "put": {
+                "summary": "Updates an existing password",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "updatePassword",
+                        "description": "First password is the actual one, the second is the new one",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/PasswordChange"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User successefully updated"
+                    },
+                    "400": {
+                        "description": "Old Password is not matching the existing one"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        },
+        "/user/memberType": {
+            "get": {
+                "summary": "Get all member types",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "You successfuly got the information"
+                    }
+                }
+            }
+        },
+        "/user/degree": {
+            "get": {
+                "summary": "Get all degrees",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "You successfuly got the information"
+                    }
+                }
+            }
+        },
+        "/user/areasInterests": {
+            "get": {
+                "summary": "Get all areas of interest",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "You successfuly got the information"
+                    }
+                }
+            }
+        },
+        "/user/reasons": {
+            "get": {
+                "summary": "Get all reasons",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "You successfuly got the information"
+                    }
+                }
+            }
+        },
+        "/user/portugalCounty": {
+            "get": {
+                "summary": "Get all Portugal countys",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "You successfuly got the information"
+                    }
+                }
+            }
+        }
+        
+        
+    },
+    "definitions": {
+        "Notification": {
+            "type": "object",
+            "required": [
+                "action"
+            ],
+            "properties": {
+                "auth": {
+                    "type": "string"
+                },
+                "action": {
+                    "type": "string"
+                },
+                "recipient": {
+                    "type": "string"
+                },
+                "params": {
+                    "type": "object"
+                }
+            }
+        },
+        "Login": {
+            "type": "object",
+            "required": [
+                "email",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "Forgot": {
+            "type": "object",
+            "required": [
+                "email",
+                "action"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "action": {
+                    "type": "string"
+                }
+            }
+        },
+        "Reset": {
+            "type": "object",
+            "required": [
+                "id",
+                "password",
+                "confirmPassword"
+            ],
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "confirmPassword": {
+                    "type": "string"
+                }
+            }
+        },
+        "User": {
+            "type": "object",
+            "properties": {
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "phoneNumber": {
+                    "type": "string"
+                },
+                "isVolunteer": {
+                    "type": "boolean"
+                },
+                "communityMemberType": {
+                    "type": "string"
+                },
+                "county": {
+                    "type": "string"
+                },
+                "dateOfBirth": {
+                    "type": "string"
+                },
+                "schoolOrService": {
+                    "type": "string"
+                },
+                "degree": {
+                    "type": "string"
+                },
+                "areasOfInterest": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "reasons": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "RGPD": {
+                    "type": "boolean"
+                },
+                "role": {
+                    "type": "string"
+                },
+                "isInactive": {
+                    "type": "boolean"
+                },
+                "byAdmin": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "UpdateUser": {
+            "type": "object",
+            "properties": {
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "phoneNumber": {
+                    "type": "string"
+                },
+                "isVolunteer": {
+                    "type": "boolean"
+                },
+                "communityMemberType": {
+                    "type": "string"
+                },
+                "county": {
+                    "type": "string"
+                },
+                "dateOfBirth": {
+                    "type": "string"
+                },
+                "schoolOrService": {
+                    "type": "string"
+                },
+                "degree": {
+                    "type": "string"
+                },
+                "areasOfInterest": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "reasons": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "RGPD": {
+                    "type": "boolean"
+                },
+                "role": {
+                    "type": "string"
+                },
+                "isInactive": {
+                    "type": "boolean"
+                },
+                "byAdmin": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "PasswordChange": {
+            "type": "object",
+            "properties": {
+                "oldPassword": {
+                    "type": "string"
+                },
+                "newPassword": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

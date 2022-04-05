@@ -1,0 +1,329 @@
+require("dotenv").config({ path: "../.env" });
+const chai = require("chai");
+const mongoose = require("mongoose");
+const chaiHttp = require("chai-http");
+var assert = require("assert");
+const data = require("./dataUser.json");
+const User = require("../models/user.model");
+const user = require("../routes/user");
+const manageRequest = require("../routes/auth/manageRequests");
+const config = require("../config");
+const uri = config.atlasUri;
+
+chai.use(chaiHttp);
+chai.should();
+
+const areas = [
+  "Atividades Académicas",
+  "Ambiental",
+  "Apoio a Eventos",
+  "Informática",
+  "Comunicação",
+  "Cultural",
+  "Desporto",
+  "Educação",
+  "Saúde",
+  "Social",
+];
+
+let areasExpc = [
+  { value: "Atividades Académicas" },
+  { value: "Ambiental" },
+  { value: "Apoio a Eventos" },
+  { value: "Informática" },
+  { value: "Comunicação" },
+  { value: "Cultural" },
+  { value: "Desporto" },
+  { value: "Educação" },
+  { value: "Saúde" },
+  { value: "Social" },
+];
+
+before(function (done) {
+  mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+  });
+
+  const connection = mongoose.connection;
+  connection.once("open", async () => {
+    await User.deleteOne({ email: data.USER_ADD_VALID_USER.email });
+    await User.deleteOne({ email: data.USER_ADD_VALID_ADM.email });
+    done();
+  });
+});
+
+describe("Passwords Requests - User", () => {
+  let newRequest = {
+    id: 1,
+    email: "180221109@estudantes.ips.pt",
+  };
+
+  describe("createRequest()", () => {
+    it("Deve por o elemento no array - newRequest", (done) => {
+      manageRequest.createRequest(newRequest);
+      let element;
+      for (let i = 0; i < manageRequest.createRequests.length; i++) {
+        element = manageRequest.createRequests[i];
+      }
+      assert.equal(element, newRequest);
+      done();
+    });
+  });
+  describe("getElemRequest()", () => {
+    it("Deve obter o elemento - newRequest", (done) => {
+      let elem = manageRequest.getElemRequest(1);
+      assert.equal(elem, newRequest);
+      done();
+    });
+  });
+
+  describe("deleteRequest()", () => {
+    it("Deve deletar o elemento", (done) => {
+      let a = manageRequest.deleteRequest(1);
+      assert.equal(newRequest, a[0]);
+      done();
+    });
+  });
+
+  describe("convertToJSONObj()", () => {
+    it("Deve converter para outro tipo", (done) => {
+      let a = user.convertToJSONObj(areas);
+      assert.equal(JSON.stringify(a[0]), JSON.stringify(areasExpc[0]));
+      done();
+    });
+  });
+});
+
+describe("User - Endpoints", () => {
+  describe("POST /api/user", () => {
+    it("Deve criar o utilizador pelo adm - 201", (done) => {
+      chai
+        .request("http://localhost:5000")
+        .post("/api/user")
+        .send(data.USER_ADD_VALID_ADM)
+        .end(async (err, res) => {
+          chai.assert.isNull(err);
+          chai.assert.isNotEmpty(res.body);
+          res.should.have.status(201);
+          res.body.should.have.property("success").equal(true);
+          done();
+        });
+    });
+
+    it("Deve criar o utilizador - 201", (done) => {
+      chai
+        .request("http://localhost:5000")
+        .post("/api/user")
+        .send(data.USER_ADD_VALID_USER)
+        .end(async (err, res) => {
+          chai.assert.isNull(err);
+          chai.assert.isNotEmpty(res.body);
+          res.should.have.status(201);
+          res.body.should.have.property("success").equal(true);
+
+          done();
+        });
+    });
+
+    it("Deve retornar utilizador existente - 400", (done) => {
+      chai
+        .request("http://localhost:5000")
+        .post("/api/user")
+        .send(data.USER_ADD_VALID_USER)
+        .end((err, res) => {
+          chai.assert.isNull(err);
+          chai.assert.isObject(res.body);
+          res.should.have.status(400);
+          res.body.should.have.property("success").equal(false);
+          done();
+        });
+    });
+
+    it("Deve retornar campos já presentes na BD - 400", (done) => {
+      chai
+        .request("http://localhost:5000")
+        .post("/api/user")
+        .send(data.USER_ADD_VALID_SAME_PHONE)
+        .end((err, res) => {
+          chai.assert.isNull(err);
+          chai.assert.isObject(res.body);
+          res.should.have.status(400);
+          res.body.should.have.property("success").equal(false);
+          done();
+        });
+    });
+  });
+
+  describe("PUT /api/user/update/:id", () => {
+    it("Deve retornar utilizador atualizado - 200", (done) => {
+      chai
+        .request("http://localhost:5000")
+        .put("/api/user/update/" + data.USER_UP_VALID_USER._id)
+        .send(data.USER_UP_VALID_USER)
+        .end((err, res) => {
+          chai.assert.isNull(err);
+          chai.assert.isNotEmpty(res.body);
+          res.should.have.status(200);
+          res.body.should.have.property("success").equal(true);
+          res.body.should.have
+            .property("message")
+            .equal("Utilizador atualizado!");
+          done();
+        });
+    });
+
+    it("Deve retornar utilizador atualizado pelo adm - 200", (done) => {
+      chai
+        .request("http://localhost:5000")
+        .put("/api/user/update/" + data.USER_UP_VALID_ADM._id)
+        .send(data.USER_UP_VALID_ADM)
+        .end((err, res) => {
+          chai.assert.isNull(err);
+          chai.assert.isNotEmpty(res.body);
+          res.should.have.status(200);
+          res.body.should.have.property("success").equal(true);
+          done();
+        });
+    });
+  });
+
+  describe("PUT /api/user/updatePassword/:id", () => {
+    it("Deve mudar a password (perfil) - 200", (done) => {
+      chai
+        .request("http://localhost:5000")
+        .put("/api/user/updatePassword/" + data.USER_UP_VALID_USER._id)
+        .send(data.CHANGE_PASSWORD)
+        .end((err, res) => {
+          chai.assert.isNull(err);
+          chai.assert.isNotEmpty(res.body);
+          res.should.have.status(200);
+          res.body.should.have.property("success").equal(true);
+          res.body.should.have.property("message").equal("Password atualizada!");
+          done();
+        });
+    });
+  });
+
+  /*   describe("DELETE /api/user/delete/:id", () => {
+    it("Deve retornar utilizador apagado - 200", (done) => {
+      chai
+        .request("http://localhost:5000")
+        .delete("/api/user/delete/5ecc4e8489725666acb6df07")
+        .end((err, res) => {
+          chai.assert.isNull(err);
+          res.body.should.be.a('object');
+          res.should.have.status(200);
+          res.body.should.have.property("success").equal(true);
+          done();
+        });
+    });
+  }); */
+
+  describe("GET /api/user/", () => {
+    it("Deve retornar um utilizador - 200", (done) => {
+      chai
+        .request("http://localhost:5000")
+        .get("/api/user/details/" + data.MARCO_USER._id)
+        .end((err, res) => {
+          chai.assert.isNull(err);
+          res.body.should.be.a("object");
+          res.should.have.status(200);
+          res.body.should.have.property("success").equal(true);
+          done();
+        });
+    });
+    it("Deve retornar todos os utilizadores - 200", (done) => {
+      chai
+        .request("http://localhost:5000")
+        .get("/api/user/")
+        .end((err, res) => {
+          chai.assert.isNull(err);
+          res.should.have.status(200);
+          res.body.should.have.property("success").equal(true);
+          done();
+        });
+    });
+  });
+
+  describe("User - Auth", () => {
+
+    describe("GET /api/credentials/confirmAccount/:token", () => {
+      it("Deve confirmar a conta do utilizador - 200", (done) => {
+        let token =
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWNiMTQ5N2RhZThlYjBlMGMyNjBjMzIiLCJpYXQiOjE1OTAzNjczODN9.mXK_8x1gnNgjYhlK0DD1SyS_on2-bWTC67AMBN4v7nQ";
+        chai
+          .request("http://localhost:5000")
+          .get("/api/credentials/confirmAccount/" + token)
+          .end((err, res) => {
+            res.should.have.status(200);
+            done();
+          });
+      });
+    });
+
+    describe("POST /api/auth/login", () => {
+      it("Deve fazer login - 200", (done) => {
+        chai
+          .request("http://localhost:5000")
+          .post("/api/auth/login/")
+          .send(data.LOGIN)
+          .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.have.property("success").equal(true);
+            done();
+          });
+      });
+    });
+
+    describe("POST /api/credentials/forgot", () => {
+      it("Deve enviar email para alterar password - 200", (done) => {
+        chai
+          .request("http://localhost:5000")
+          .post("/api/credentials/forgot")
+          .send(data.FORGOT_PASSWORD)
+          .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.have.property("success").equal(true);
+            res.body.should.have
+              .property("message")
+              .equal("Verifique seu email para redefinir sua palavra-passe");
+            done();
+          });
+      });
+    });
+
+    describe("POST /api/credentials/reset", () => {
+      it("Deve alterar a password - 200", (done) => {
+        chai
+          .request("http://localhost:5000")
+          .patch("/api/credentials/reset")
+          .send(data.RESET_PASSWORD)
+          .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.have.property("success").equal(true);
+            res.body.should.have
+              .property("message")
+              .equal(
+                "Sua password foi atualizada, por favor tente fazer login"
+              );
+            done();
+          });
+      });
+    });
+
+    describe("GET /api/credentials/logout", () => {
+      it("Deve sair da conta do utilizador - (unitário) 200", (done) => {
+        chai
+          .request("http://localhost:5000")
+          .get("/api/credentials/logout/")
+          .end((err, res) => {
+            res.should.have.status(200);
+            done();
+          });
+      });
+    });
+  });
+});

@@ -1,0 +1,28 @@
+require('dotenv').config();
+const chai = require("chai");
+const http = require("chai-http");
+const subSet = require("chai-subset");
+const assert = require('assert');
+const email = require("../notifications/email"); // A ser testado
+
+chai.use(http);
+chai.use(subSet);
+
+let action = "volunteeringApplicationStatus";
+
+let myParams = {
+  "params": {
+    "volunteerUsername": "Joanã Costa",
+    "url": "www.volunteering.com",
+    "reason": "Teste"
+  }
+};
+
+let recipient = "joanacosta.costa007@gmail.com";
+
+describe("/notify - POST", () => {
+  it("Send email to the client", async () => {
+    // let isSent = await email.isSendedEmail(action, myParams, recipient);
+    // assert.equal(isSent, true);
+  });
+});

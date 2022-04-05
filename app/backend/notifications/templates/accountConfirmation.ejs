@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Confirmação de conta em VolunteeringIPS</title>
+    <meta charset="UTF-8">
+</head>
+
+<body style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+    <%- include('partials/header'); %>
+
+    <div style="padding: 25px 10px 10px 10px;">
+        <b style="font-size: 20px;">Caro <%= params.firstName %>,</b><br/><br/>
+        <p style="font-size: 14px;">Pedimos-lhe que confirme a sua conta clicando <a href="<%= params.url %>">aqui</a></p>
+        <br/><br/>
+        <b><p>Atenciosamente,</p>
+            <p>VolunteeringIPS</p></b>
+    </div>
+
+    <%- include('partials/footer'); %>
+</body>
+
+</html>

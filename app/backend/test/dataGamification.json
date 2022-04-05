@@ -1,0 +1,18 @@
+{
+  "USER_JOANAM": {
+    "_id": "5ecb1497dae8eb0e0c260c32",
+    "email": "1802211109@estudantes.ips.pt"
+  },
+  "USER_MARCO": {
+    "_id": "5ed11eb07eb17f3c5842d8b9",
+    "email": "180221086@estudantes.ips.pt"
+  },
+  "SPEND_COINS": {
+    "coins": 1,
+    "userID": "5ecb1497dae8eb0e0c260c32",
+    "raffleID": "5eee1c2f6a6d5641d865f7b7"
+  },
+  "SORTEIO_CANETA": {
+    "_id": "5eee1c2f6a6d5641d865f7b7"
+  }
+}

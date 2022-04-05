@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Vencedor de sorteio no VolunteeringIPS</title>
+        <meta charset="UTF-8">
+        <style>
+            
+        </style>
+    </head>
+    <body style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+        <%- include('partials/header'); %>
+
+        <div style="padding: 25px 10px 10px 10px;">
+            <b style="font-size: 20px;">Parabéns caro <%= params.firstName %>!</b><br/><br/>
+            <p style="font-size: 14px;">Informamos-lhe que foi um dos vencedores no sorteio "<%= params.raffleName %>".</p>
+            <br/><br/>
+            <div id="container_details">
+                <p>Sorteio: <%= params.raffleName %></p>
+                <p>Posição: <%= params.placement %>º Lugar</p>
+                <p>Prémio: <%= params.prize %></p>
+            </div><br><br>
+            <b><p>Atenciosamente,</p>
+                <p>VolunteeringIPS</p></b>
+        </div>
+
+        <%- include('partials/footer'); %>
+    </body>
+</html>
